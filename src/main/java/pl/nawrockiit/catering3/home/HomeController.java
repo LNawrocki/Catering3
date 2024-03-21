@@ -48,6 +48,8 @@ public class HomeController {
     @GetMapping
     public String homeView(Model model) {
         model.addAttribute("companyData", companyData);
+        model.addAttribute("infos", infoService.findAll());
+
         if (configService.findAll().isEmpty() || userService.findAll().isEmpty()) {
             Department department = new Department();
             department.setId(0);
@@ -68,11 +70,8 @@ public class HomeController {
             return "admin/initPage";
         }
 
-
         if (configService.editModeStatus()) {
-            model.addAttribute("infos", infoService.findAll());
             model.addAttribute("pageId", 0);
-            model.addAttribute("infos", infoService.findAll());
             return "home-editmode";
         }
         model.addAttribute("mealsMonday", newMenuService.newMenuFindByDayId(1));
@@ -81,7 +80,6 @@ public class HomeController {
         model.addAttribute("mealsThursday", newMenuService.newMenuFindByDayId(4));
         model.addAttribute("mealsFriday", newMenuService.newMenuFindByDayId(5));
         model.addAttribute("pageId", 0);
-        model.addAttribute("infos", infoService.findAll());
 
         if (!newMenuService.findAll().isEmpty()) {
             model.addAttribute("period", newMenuService.findAll().get(0).getPeriod());

@@ -1,11 +1,7 @@
 package pl.nawrockiit.catering3.admin;
 
 
-import org.apache.poi.hssf.record.PageBreakRecord;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.multipart.MultipartFile;
 import pl.nawrockiit.catering3.actualOrder.ActualOrder;
 import pl.nawrockiit.catering3.actualOrder.ActualOrderService;
 import pl.nawrockiit.catering3.config.Config;
@@ -21,7 +16,7 @@ import pl.nawrockiit.catering3.config.ConfigService;
 import pl.nawrockiit.catering3.department.DepartmentService;
 import pl.nawrockiit.catering3.email.EmailDetails;
 import pl.nawrockiit.catering3.email.EmailService;
-import pl.nawrockiit.catering3.newMenu.NewMenu;
+import pl.nawrockiit.catering3.info.InfoService;
 import pl.nawrockiit.catering3.newMenu.NewMenuService;
 import pl.nawrockiit.catering3.newOrder.NewOrder;
 import pl.nawrockiit.catering3.newOrder.NewOrderService;
@@ -29,23 +24,14 @@ import pl.nawrockiit.catering3.user.User;
 import pl.nawrockiit.catering3.user.UserService;
 import pl.nawrockiit.catering3.xlsx.ExcelExportService;
 
-import javax.script.ScriptEngine;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.nio.file.attribute.UserPrincipal;
 import java.security.Principal;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.temporal.WeekFields;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import static java.sql.JDBCType.*;
-import static javax.management.openmbean.SimpleType.STRING;
 
 @Controller
 @RequestMapping("/admin")
@@ -62,8 +48,9 @@ public class AdminController {
     private final ActualOrderService actualOrderService;
     private final EmailService emailService;
     private final ExcelExportService excelExportService;
+    private final InfoService infoService;
 
-    public AdminController(@Value("#{${companyData}}") Map<String, String> companyData, UserService userService, DepartmentService departmentService, PasswordEncoder passwordEncoder, ConfigService configService, NewOrderService newOrderService, NewMenuService newMenuService, ActualOrderService actualOrderService, EmailService emailService, ExcelExportService excelExportService) {
+    public AdminController(@Value("#{${companyData}}") Map<String, String> companyData, UserService userService, DepartmentService departmentService, PasswordEncoder passwordEncoder, ConfigService configService, NewOrderService newOrderService, NewMenuService newMenuService, ActualOrderService actualOrderService, EmailService emailService, ExcelExportService excelExportService, InfoService infoService) {
         this.companyData = companyData;
         this.userService = userService;
         this.departmentService = departmentService;
@@ -74,6 +61,7 @@ public class AdminController {
         this.actualOrderService = actualOrderService;
         this.emailService = emailService;
         this.excelExportService = excelExportService;
+        this.infoService = infoService;
     }
 
     @GetMapping("/home")
@@ -84,6 +72,7 @@ public class AdminController {
         User user = userService.getUserByUsername(username);
         model.addAttribute("user", user);
         model.addAttribute("pageId", 2);
+        model.addAttribute("infos", infoService.findAll());
 
         NewOrder order = newOrderService.getNewOrderByUserId(user.getUserId());
         if (configService.editModeStatus()) {

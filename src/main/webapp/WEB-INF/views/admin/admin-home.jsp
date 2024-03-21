@@ -33,6 +33,21 @@
         </div>
     </div>
 </div>
+<c:if test="${infos.size() > 0}">
+    <div class="main-block">
+        <div style="text-align: center; color: #000000; font-weight: bold">Ogłoszenia
+        </div>
+        <div class="day-block">
+            <div class="day" style="width: 800px; word-wrap: break-word">
+                <ol>
+                    <c:forEach var="info" items="${infos}">
+                        <li style="list-style-type: block">${info.infoContent}</li>
+                    </c:forEach>
+                </ol>
+            </div>
+        </div>
+    </div>
+</c:if>
 <div class="main-block">
     <div class="day-block">
         <h3>Nowe menu ${period} ( ${periodDate} )</h3>

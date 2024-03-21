@@ -1,6 +1,5 @@
 package pl.nawrockiit.catering3.user;
 
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -12,17 +11,14 @@ import pl.nawrockiit.catering3.config.ConfigService;
 import pl.nawrockiit.catering3.department.DepartmentService;
 import pl.nawrockiit.catering3.email.EmailDetails;
 import pl.nawrockiit.catering3.email.EmailService;
+import pl.nawrockiit.catering3.info.InfoService;
 import pl.nawrockiit.catering3.newMenu.NewMenuService;
 import pl.nawrockiit.catering3.newOrder.NewOrder;
 import pl.nawrockiit.catering3.newOrder.NewOrderService;
 
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.temporal.WeekFields;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -42,8 +38,9 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
     private final Map<String, String> companyData;
+    private final InfoService infoService;
 
-    public UserController(DepartmentService departmentService, NewOrderService newOrderService, UserService userService, NewMenuService newMenuService, ConfigService configService, PasswordEncoder passwordEncoder, EmailService emailService, @Value("#{${companyData}}") Map<String,  String > companyData) {
+    public UserController(DepartmentService departmentService, NewOrderService newOrderService, UserService userService, NewMenuService newMenuService, ConfigService configService, PasswordEncoder passwordEncoder, EmailService emailService, @Value("#{${companyData}}") Map<String,  String > companyData, InfoService infoService) {
         this.departmentService = departmentService;
         this.newOrderService = newOrderService;
         this.userService = userService;
@@ -52,6 +49,7 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
         this.emailService = emailService;
         this.companyData = companyData;
+        this.infoService = infoService;
     }
 
     @GetMapping("/home")
@@ -65,6 +63,7 @@ public class UserController {
 
         model.addAttribute("user", user);
         model.addAttribute("pageId", 2);
+        model.addAttribute("infos", infoService.findAll());
 
         if (configService.getConfig().getEditMode()) {
             model.addAttribute("user", user);
