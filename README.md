@@ -34,7 +34,11 @@ Osoba będąca administratorem posiada dodatkowe możliwości:
 11. Import i Export do plików xls - kopia danch i łatwe kopiowanie listy nowego menu między programami.
 
 
-### Dla osób chcących przetestować program we własnym zakresie odsyłam do pliku application.properties. Tam znajdziecie wskazówki i potrzebne informację do uruchomienia programu.
+### Uruchomienie programu.
+
+Zgodnie z ustawieniami w pliku application.properties należy stworzyć bazę danych.
+Nie jest konieczne tworzenie tabel ponieważ zostanie to zrobione podczas pierwszego uruchamiania programu.
+Podczas pierwszego uruchomienia zostanie wyświetlona strona inicjalizująca, gdzie mozna utworzyć konto administratora i zostaną zainicjalizowane podstawowe parametry
 
 
 ![Catering3](https://github.com/LNawrocki/Catering3/blob/master/Catering3.gif)
@@ -75,6 +79,10 @@ A person who is an administrator has additional possibilities:
 11. Import and Export to xls files - data copy and easy copy new menu list between programs.
 
 
-### For people who want to test the program on their own, please refer to the application.properties file. There you will find tips and information needed to run the program.
+### Sterting the program.
+
+According to the settings in the application.properties file, you need to create a database.
+It is not necessary to create tables because this will be done when you first run the program.
+During the first launch, an initialization page will be displayed, where you can create an administrator account and basic parameters will be initialized.
 
 
