@@ -23,7 +23,7 @@
     <div class="main-block">
         <div class="login-row">
             <label for="userId">ID użytkownika:
-                <form:input path="userId" value = "0"/><form:errors path="userId"/><br>
+                <form:input path="userId" value = "1"/><form:errors path="userId"/><br>
             </label>
         </div>
         <div class="login-row">

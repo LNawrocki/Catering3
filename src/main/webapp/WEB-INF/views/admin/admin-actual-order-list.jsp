@@ -57,6 +57,7 @@
     <div class="day-block">
         <table>
             <tr>
+<!--
                 <td>
                     <div class="day">
                         <div>
@@ -64,6 +65,7 @@
                         </div>
                     </div>
                 </td>
+--!>
                 <td>
                     <div class="day">
                         <div>
@@ -116,6 +118,7 @@
             </tr>
             <c:forEach var="actualOrder" items="${actualOrders}">
                 <tr>
+<!--
                     <td>
                         <div class="day">
                             <div>
@@ -123,6 +126,7 @@
                             </div>
                         </div>
                     </td>
+--!>
                     <td>
                         <div class="day">
                             <div>

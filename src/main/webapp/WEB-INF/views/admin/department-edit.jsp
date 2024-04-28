@@ -51,6 +51,7 @@
     <div class="login-row">
         <table>
             <tr>
+<!--
                 <td>
                     <div class="day">
                         <div>
@@ -58,6 +59,7 @@
                         </div>
                     </div>
                 </td>
+--!>
                 <td>
                     <div class="day">
                         <div>
@@ -78,6 +80,7 @@
             </tr>
             <c:forEach items="${departments}" var="department">
                 <tr>
+<!--
                     <td>
                         <div class="day">
                             <div>
@@ -85,6 +88,7 @@
                             </div>
                         </div>
                     </td>
+--!>
                     <td>
                         <div class="day">
                             <div>

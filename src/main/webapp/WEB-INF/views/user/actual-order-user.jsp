@@ -29,6 +29,7 @@
     <div class="day-block">
         <table>
             <tr>
+<!--
                 <td>
                     <div class="day">
                         <div>
@@ -36,6 +37,7 @@
                         </div>
                     </div>
                 </td>
+--!>
                 <td>
                     <div class="day">
                         <div>
@@ -87,6 +89,7 @@
                 </td>
             </tr>
             <tr>
+<!--
                 <td>
                     <div class="day">
                         <div>
@@ -94,6 +97,7 @@
                         </div>
                     </div>
                 </td>
+--!>
                 <td>
                     <div class="day">
                         <div>
